@@ -1,56 +1,83 @@
-# Welcome to your Expo app 👋
+# MASA Alumni 2024 Mobile App 📱
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a premium React Native mobile application built on **Expo** for the **MASA (Member & Team Room)** rewards and claim ecosystem. The interface is optimized for a sleek, premium dark-mode aesthetic with styled card layouts, timeline activity logs, and a fully navigable flow across 15 responsive screens.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Technical Stack
 
-   ```bash
-   npm install
-   ```
+- **Framework**: [React Native](https://reactnative.dev/) with [Expo (SDK 56)](https://expo.dev/)
+- **Navigation**: [React Navigation (v7)](https://reactnavigation.org/) utilizing a Bottom Tab Navigator nested with Stack Navigators
+- **Icons**: [Tabler Icons React Native](https://github.com/tabler/tabler-icons/tree/master/packages/icons-react-native)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) for static type verification
+- **Styling**: Vanilla React Native `StyleSheet` with curated theme tokens
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 📂 Screens Overview
 
-In the output, you'll find options to open the app in a
+The application features **15 fully navigable screens** structured into Member and Team Room domains:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 👤 Member Room (Home Tab)
+1. **Member Room Home**: Main room feed displaying statistics, sub-team room links, and a quick actions menu.
+2. **Invite Code Screen**: Form to copy/share invite codes (`MASA-A24-KJ8`) and send email invites, alongside a list of active joined members.
+3. **Reward Member Screen**: Form to nominate a member for XRDM rewards with character citation counters.
+4. **Claim XRDM Screen**: Good deed claim submission form with a visual timeline representing the 3-step approval process.
+5. **Approval Queue Screen**: Administrator view to approve or reject pending member room claims and reward nominations.
+6. **Challenges Screen**: Interactive panel detailing open/claimed challenges, complete with proof link submission.
+7. **Voting Screen**: Ongoing/closed polls featuring animated vote-distribution progress tracks.
+8. **History Screen**: Scrollable audit timeline filtered by Rewards, Claims, Challenges, and Votes.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 👥 Team Room (Rooms Tab)
+9. **Team Room Home**: Dedicated dashboard for sub-rooms (`Dev Squad – Backend`) displaying localized stats and actions.
+10. **Create Team Room**: Setup panel to spawn new sub-team rooms, generate invite codes, and invite members.
+11. **Team Admin Approval Queue**: Localized approval board for sub-team claims and rewards.
+12. **Team Member - Submit Claim**: Claim submission form scoped specifically to team tasks.
+13. **Beneficiary Endorsement Screen**: Dedicated step for beneficiaries to add citations, endorsing or declining claims.
+14. **Team History Screen**: Activity audit log scoped to events within the team room.
 
-## Get a fresh project
+### ⚙️ User Center (Profile Tab)
+15. **Profile & Settings Screen**: Account summary displaying Member ID, Balance (`120 XRDM`), Wallet Address, and toggles/actions for Preferences (Dark Mode, Push Notifications, Clear Cache, and Logout).
 
-When you're ready, run:
+---
 
+## 🏃 Getting Started
+
+Follow these steps to run the project locally.
+
+### Prerequisites
+
+Make sure you have [Node.js (v18+)](https://nodejs.org/) installed.
+
+### 1. Clone the Repository
 ```bash
-npm run reset-project
+git clone <your-repository-url>
+cd rdm-app
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Install Dependencies
+Install all package dependencies including React Navigation, Tabler Icons, and Expo modules:
+```bash
+npm install
+```
 
-### Other setup steps
+### 3. Start the Expo Dev Server
+Start Metro Bundler with cache clearance to build the project cleanly:
+```bash
+npx expo start --clear
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### 4. Running on Devices
+In the Metro console output, press the corresponding key to open the application:
+- Press **`w`** to open in your web browser.
+- Press **`a`** to open in an Android Emulator.
+- Press **`i`** to open in an iOS Simulator.
+- Scan the QR code using the **Expo Go** app on your physical iOS or Android device.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🔬 Code Verification
+You can run a TypeScript compiler check to verify code soundness and ensure there are no syntax or type errors:
+```bash
+npx tsc --noEmit
+```
