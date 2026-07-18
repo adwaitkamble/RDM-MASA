@@ -88,7 +88,7 @@ export default function TeamSubmitClaimScreen({ navigation }: { navigation: any 
           style={styles.actBtn}
           onPress={() => {
             alert('Claim submitted for endorsement!');
-            navigation.navigate('BeneficiaryEndorsement');
+            navigation.navigate('RoomsTab', { screen: 'BeneficiaryEndorsement' });
           }}
         >
           <IconSend color="#AFA9EC" size={18} style={{ marginRight: 6 }} />

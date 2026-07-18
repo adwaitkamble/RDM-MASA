@@ -120,7 +120,7 @@ export default function CreateTeamScreen({ navigation }: { navigation: any }) {
           style={styles.actBtn}
           onPress={() => {
             alert('Team Room created!');
-            navigation.navigate('TeamHome');
+            navigation.navigate('RoomsTab', { screen: 'TeamHome' });
           }}
         >
           <IconUsers color="#AFA9EC" size={18} style={{ marginRight: 6 }} />

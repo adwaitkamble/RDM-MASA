@@ -95,7 +95,7 @@ export default function ChallengeScreen({ navigation }: { navigation: any }) {
           style={styles.actBtn}
           onPress={() => {
             alert('Proof submitted!');
-            navigation.navigate('AdminQueue');
+            navigation.navigate('HomeTab', { screen: 'AdminQueue' });
           }}
         >
           <IconBolt color="#EF9F27" size={18} style={{ marginRight: 6 }} />

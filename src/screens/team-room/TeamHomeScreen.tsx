@@ -36,7 +36,7 @@ export default function TeamHomeScreen({ navigation }: { navigation: any }) {
       </View>
 
       {/* Back Button */}
-      <TouchableOpacity style={styles.backBtn} onPress={() => navigation.navigate('MemberHome')}>
+      <TouchableOpacity style={styles.backBtn} onPress={() => navigation.navigate('HomeTab', { screen: 'MemberHome' })}>
         <IconArrowLeft color="#aaa" size={16} />
         <Text style={styles.backBtnText}>MASA Alumni 2024</Text>
       </TouchableOpacity>
@@ -61,14 +61,14 @@ export default function TeamHomeScreen({ navigation }: { navigation: any }) {
           </View>
           <TouchableOpacity 
             style={styles.statBox} 
-            onPress={() => navigation.navigate('TeamAdminQueue')}
+            onPress={() => navigation.navigate('RoomsTab', { screen: 'TeamAdminQueue' })}
           >
             <Text style={[styles.statNum, { color: COLORS.amber }]}>2</Text>
             <Text style={styles.statLabel}>Pending</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.statBox} 
-            onPress={() => navigation.navigate('ChallengeDetail')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'ChallengeDetail' })}
           >
             <Text style={[styles.statNum, { color: COLORS.teal }]}>1</Text>
             <Text style={styles.statLabel}>Challenge</Text>
@@ -82,7 +82,7 @@ export default function TeamHomeScreen({ navigation }: { navigation: any }) {
         <View style={styles.gridRow}>
           <TouchableOpacity 
             style={[styles.gridItem, { borderColor: '#534AB7' }]} 
-            onPress={() => navigation.navigate('RewardMember')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'RewardMember' })}
           >
             <View style={[styles.gridIconBg, { borderColor: '#534AB7' }]}>
               <IconCoin color="#AFA9EC" size={22} />
@@ -92,7 +92,7 @@ export default function TeamHomeScreen({ navigation }: { navigation: any }) {
 
           <TouchableOpacity 
             style={[styles.gridItem, { borderColor: '#534AB7' }]} 
-            onPress={() => navigation.navigate('TeamSubmitClaim')}
+            onPress={() => navigation.navigate('RoomsTab', { screen: 'TeamSubmitClaim' })}
           >
             <View style={[styles.gridIconBg, { borderColor: '#534AB7' }]}>
               <IconFileCheck color="#AFA9EC" size={22} />
@@ -104,7 +104,7 @@ export default function TeamHomeScreen({ navigation }: { navigation: any }) {
         <View style={styles.gridRow}>
           <TouchableOpacity 
             style={[styles.gridItem, { borderColor: '#534AB7' }]} 
-            onPress={() => navigation.navigate('ChallengeDetail')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'ChallengeDetail' })}
           >
             <View style={[styles.gridIconBg, { borderColor: '#534AB7' }]}>
               <IconBolt color="#AFA9EC" size={22} />
@@ -114,7 +114,7 @@ export default function TeamHomeScreen({ navigation }: { navigation: any }) {
 
           <TouchableOpacity 
             style={[styles.gridItem, { borderColor: '#534AB7' }]} 
-            onPress={() => navigation.navigate('Voting')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'Voting' })}
           >
             <View style={[styles.gridIconBg, { borderColor: '#534AB7' }]}>
               <IconChecks color="#AFA9EC" size={22} />
@@ -136,7 +136,7 @@ export default function TeamHomeScreen({ navigation }: { navigation: any }) {
 
           <TouchableOpacity 
             style={[styles.gridItem, { borderColor: '#534AB7' }]} 
-            onPress={() => navigation.navigate('TeamHistory')}
+            onPress={() => navigation.navigate('RoomsTab', { screen: 'TeamHistory' })}
           >
             <View style={[styles.gridIconBg, { borderColor: '#534AB7' }]}>
               <IconClock color="#AFA9EC" size={22} />
@@ -159,7 +159,7 @@ export default function TeamHomeScreen({ navigation }: { navigation: any }) {
       {/* Action Button: Create Sub-Team Room */}
       <TouchableOpacity 
         style={styles.adminActionBtn}
-        onPress={() => navigation.navigate('CreateTeamRoom')}
+        onPress={() => navigation.navigate('RoomsTab', { screen: 'CreateTeamRoom' })}
       >
         <IconPlus color="#AFA9EC" size={16} style={{ marginRight: 6 }} />
         <Text style={styles.adminActionBtnText}>Create new Team Room</Text>

@@ -50,21 +50,21 @@ export default function MemberHomeScreen({ navigation }: { navigation: any }) {
         <View style={styles.statsRow}>
           <TouchableOpacity 
             style={styles.statBox}
-            onPress={() => navigation.navigate('InviteCode')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'InviteCode' })}
           >
             <Text style={styles.statNum}>48</Text>
             <Text style={styles.statLabel}>Members</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.statBox} 
-            onPress={() => navigation.navigate('AdminQueue')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'AdminQueue' })}
           >
             <Text style={styles.statNum}>12</Text>
             <Text style={styles.statLabel}>Pending</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.statBox} 
-            onPress={() => navigation.navigate('ChallengeDetail')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'ChallengeDetail' })}
           >
             <Text style={[styles.statNum, { color: COLORS.amber }]}>3</Text>
             <Text style={styles.statLabel}>Challenges</Text>
@@ -78,7 +78,7 @@ export default function MemberHomeScreen({ navigation }: { navigation: any }) {
         <View style={styles.gridRow}>
           <TouchableOpacity 
             style={styles.gridItem} 
-            onPress={() => navigation.navigate('RewardMember')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'RewardMember' })}
           >
             <View style={styles.gridIconBg}>
               <IconCoin color="#bbb" size={22} />
@@ -88,7 +88,7 @@ export default function MemberHomeScreen({ navigation }: { navigation: any }) {
 
           <TouchableOpacity 
             style={styles.gridItem} 
-            onPress={() => navigation.navigate('ClaimXrdm')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'ClaimXrdm' })}
           >
             <View style={styles.gridIconBg}>
               <IconFileCheck color="#bbb" size={22} />
@@ -100,7 +100,7 @@ export default function MemberHomeScreen({ navigation }: { navigation: any }) {
         <View style={styles.gridRow}>
           <TouchableOpacity 
             style={styles.gridItem} 
-            onPress={() => navigation.navigate('ChallengeDetail')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'ChallengeDetail' })}
           >
             <View style={styles.gridIconBg}>
               <IconBolt color="#bbb" size={22} />
@@ -110,7 +110,7 @@ export default function MemberHomeScreen({ navigation }: { navigation: any }) {
 
           <TouchableOpacity 
             style={styles.gridItem} 
-            onPress={() => navigation.navigate('Voting')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'Voting' })}
           >
             <View style={styles.gridIconBg}>
               <IconChecks color="#bbb" size={22} />
@@ -122,7 +122,7 @@ export default function MemberHomeScreen({ navigation }: { navigation: any }) {
         <View style={styles.gridRow}>
           <TouchableOpacity 
             style={styles.gridItem} 
-            onPress={() => navigation.navigate('History')}
+            onPress={() => navigation.navigate('HomeTab', { screen: 'History' })}
           >
             <View style={styles.gridIconBg}>
               <IconClock color="#bbb" size={22} />
@@ -132,7 +132,7 @@ export default function MemberHomeScreen({ navigation }: { navigation: any }) {
 
           <TouchableOpacity 
             style={styles.gridItem} 
-            onPress={() => navigation.navigate('RoomsTab')}
+            onPress={() => navigation.navigate('RoomsTab', { screen: 'TeamHome' })}
           >
             <View style={styles.gridIconBg}>
               <IconUsers color="#bbb" size={22} />
@@ -148,7 +148,7 @@ export default function MemberHomeScreen({ navigation }: { navigation: any }) {
       {/* Dev Squad Room */}
       <TouchableOpacity 
         style={[styles.roomRow, styles.roomRowFeatured]}
-        onPress={() => navigation.navigate('RoomsTab')}
+        onPress={() => navigation.navigate('RoomsTab', { screen: 'TeamHome' })}
       >
         <View style={[styles.roomIconBg, { borderColor: '#534AB7' }]}>
           <IconUsers color="#AFA9EC" size={20} />

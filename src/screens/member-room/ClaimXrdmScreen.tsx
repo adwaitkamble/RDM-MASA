@@ -95,7 +95,7 @@ export default function ClaimXrdmScreen({ navigation }: { navigation: any }) {
           style={styles.actBtn}
           onPress={() => {
             alert('Claim submitted!');
-            navigation.navigate('AdminQueue');
+            navigation.navigate('HomeTab', { screen: 'AdminQueue' });
           }}
         >
           <IconFileCheck color="#EF9F27" size={18} style={{ marginRight: 6 }} />

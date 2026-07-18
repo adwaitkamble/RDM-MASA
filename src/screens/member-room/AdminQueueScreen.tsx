@@ -48,7 +48,7 @@ export default function AdminQueueScreen({ navigation }: { navigation: any }) {
   const handleAction = (id: number, action: string) => {
     alert(`Item ${action}d!`);
     setItems(items.filter(item => item.id !== id));
-    navigation.navigate('History');
+    navigation.navigate('HomeTab', { screen: 'History' });
   };
 
   return (

@@ -14,12 +14,12 @@ export default function BeneficiaryEndorsementScreen({ navigation }: { navigatio
 
   const handleEndorse = () => {
     alert('Claim endorsed successfully!');
-    navigation.navigate('TeamAdminQueue');
+    navigation.navigate('RoomsTab', { screen: 'TeamAdminQueue' });
   };
 
   const handleDecline = () => {
     alert('Claim endorsement declined.');
-    navigation.navigate('TeamHistory');
+    navigation.navigate('RoomsTab', { screen: 'TeamHistory' });
   };
 
   return (

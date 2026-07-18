@@ -96,7 +96,7 @@ export default function RewardMemberScreen({ navigation }: { navigation: any }) 
           style={styles.actBtn}
           onPress={() => {
             alert('Nomination submitted!');
-            navigation.navigate('AdminQueue');
+            navigation.navigate('HomeTab', { screen: 'AdminQueue' });
           }}
         >
           <IconCoin color="#5DCAA5" size={18} style={{ marginRight: 6 }} />
