@@ -23,7 +23,7 @@
       "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
-"plugins": [
+    "plugins": [
       [
         "expo-splash-screen",
         {
@@ -31,7 +31,8 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-mail-composer"
     ],
     "experiments": {
       "typedRoutes": false,

@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  ScrollView, 
+  TouchableOpacity, 
+  TextInput, 
+  Share, 
+  Linking 
+} from 'react-native';
 import { 
   IconArrowLeft, 
   IconKey, 
@@ -8,10 +17,116 @@ import {
   IconBell, 
   IconMenu2 
 } from 'tabler-icons-react-native';
+import * as MailComposer from 'expo-mail-composer';
 import { COLORS } from '../../theme/colors';
 
+interface Member {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  joined: string;
+  avatar: string;
+  avatarBg: string;
+  avatarColor: string;
+}
+
 export default function InviteScreen({ navigation }: { navigation: any }) {
-  const [email, setEmail] = useState('member@masa.org');
+  const [email, setEmail] = useState('');
+  const [members, setMembers] = useState<Member[]>([
+    {
+      id: '1',
+      name: 'Riya Kapoor',
+      email: 'riya@masa.org',
+      role: 'member',
+      joined: 'Jun 20',
+      avatar: 'RK',
+      avatarBg: '#0d2019',
+      avatarColor: '#5DCAA5'
+    },
+    {
+      id: '2',
+      name: 'Arjun Mehta',
+      email: 'arjun@masa.org',
+      role: 'committee',
+      joined: 'Jun 21',
+      avatar: 'AM',
+      avatarBg: '#1e1428',
+      avatarColor: '#AFA9EC'
+    },
+    {
+      id: '3',
+      name: 'Nisha Rao',
+      email: 'nisha@masa.org',
+      role: 'member',
+      joined: 'Jun 22',
+      avatar: 'NR',
+      avatarBg: '#1e1200',
+      avatarColor: '#EF9F27'
+    }
+  ]);
+
+  // Handle Share invite code natively
+  const handleShare = async () => {
+    try {
+      await Share.share({
+        message: 'Join MASA Alumni 2024! Enter my invite code: MASA-A24-KJ8 in the app to join our room.',
+        title: 'MASA Alumni Invite Code',
+      });
+    } catch (error: any) {
+      alert(error.message);
+    }
+  };
+
+  // Handle email invitation
+  const handleSendInvite = async () => {
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    try {
+      const isAvailable = await MailComposer.isAvailableAsync();
+      if (isAvailable) {
+        await MailComposer.composeAsync({
+          recipients: [email],
+          subject: 'Invitation to join MASA Alumni 2024',
+          body: `Hi!\n\nYou have been invited to join the MASA Alumni 2024 room. Enter the invite code: MASA-A24-KJ8 in the app to join.\n\nCheers!`,
+        });
+      } else {
+        // Fallback to mailto link
+        const mailtoUrl = `mailto:${email}?subject=Invitation to join MASA Alumni 2024&body=Hi! You have been invited to join the MASA Alumni 2024 room. Enter the invite code: MASA-A24-KJ8 in the app to join.`;
+        const canOpen = await Linking.canOpenURL(mailtoUrl);
+        if (canOpen) {
+          await Linking.openURL(mailtoUrl);
+        } else {
+          alert('No mail app configured. Displaying invite code in app.');
+        }
+      }
+    } catch (error) {
+      console.log('Mail composition error:', error);
+    }
+
+    // Add to the local list to simulate a functional backend database save
+    const nameFromEmail = email.split('@')[0];
+    const displayName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
+    const initials = nameFromEmail.substring(0, 2).toUpperCase();
+
+    const newMember: Member = {
+      id: String(Date.now()),
+      name: displayName,
+      email: email,
+      role: 'member',
+      joined: 'Just now',
+      avatar: initials,
+      avatarBg: '#0d2019',
+      avatarColor: '#5DCAA5',
+    };
+
+    setMembers(prev => [newMember, ...prev]);
+    alert(`Invite sent to ${email} and member profile created!`);
+    setEmail('');
+  };
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -56,7 +171,7 @@ export default function InviteScreen({ navigation }: { navigation: any }) {
             <IconKey color="#AFA9EC" size={18} style={{ marginRight: 6 }} />
             <Text style={styles.inviteCode}>MASA-A24-KJ8</Text>
           </View>
-          <TouchableOpacity style={styles.shareBtn} onPress={() => alert('Code shared!')}>
+          <TouchableOpacity style={styles.shareBtn} onPress={handleShare}>
             <IconShare color="#AFA9EC" size={14} style={{ marginRight: 4 }} />
             <Text style={styles.shareBtnText}>Share</Text>
           </TouchableOpacity>
@@ -79,10 +194,7 @@ export default function InviteScreen({ navigation }: { navigation: any }) {
 
         <TouchableOpacity 
           style={styles.actBtn}
-          onPress={() => {
-            alert(`Invite sent to ${email}!`);
-            navigation.goBack();
-          }}
+          onPress={handleSendInvite}
         >
           <IconSend color="#AFA9EC" size={18} style={{ marginRight: 6 }} />
           <Text style={styles.actBtnText}>Send invite</Text>
@@ -94,54 +206,34 @@ export default function InviteScreen({ navigation }: { navigation: any }) {
         <View style={styles.scHdr}>
           <View>
             <Text style={styles.scEy}>Joined members</Text>
-            <Text style={styles.scTitle}>48 members</Text>
+            <Text style={styles.scTitle}>{members.length} members</Text>
           </View>
           <View style={[styles.badge, styles.badgeTeal]}>
             <Text style={styles.badgeTextTeal}>Active</Text>
           </View>
         </View>
 
-        {/* Member Row 1 */}
-        <View style={styles.memRow}>
-          <View style={[styles.av, styles.avG]}>
-            <Text style={styles.avTextG}>RK</Text>
+        {members.map(member => (
+          <View key={member.id} style={styles.memRow}>
+            <View style={[styles.av, { backgroundColor: member.avatarBg }]}>
+              <Text style={[styles.avText, { color: member.avatarColor }]}>{member.avatar}</Text>
+            </View>
+            <View style={styles.memInfo}>
+              <Text style={styles.memName}>{member.name}</Text>
+              <Text style={styles.memSub}>Joined {member.joined} · {member.role}</Text>
+            </View>
+            <View style={[
+              styles.statusPill, 
+              member.role === 'committee' ? styles.statusPillVoted : styles.statusPillApproved
+            ]}>
+              <Text style={
+                member.role === 'committee' ? styles.statusPillTextVoted : styles.statusPillTextApproved
+              }>
+                {member.role === 'committee' ? 'Committee' : 'Active'}
+              </Text>
+            </View>
           </View>
-          <View style={styles.memInfo}>
-            <Text style={styles.memName}>Riya Kapoor</Text>
-            <Text style={styles.memSub}>Joined Jun 20 · member</Text>
-          </View>
-          <View style={[styles.statusPill, styles.statusPillApproved]}>
-            <Text style={styles.statusPillTextApproved}>Active</Text>
-          </View>
-        </View>
-
-        {/* Member Row 2 */}
-        <View style={styles.memRow}>
-          <View style={[styles.av, styles.avP]}>
-            <Text style={styles.avTextP}>AM</Text>
-          </View>
-          <View style={styles.memInfo}>
-            <Text style={styles.memName}>Arjun Mehta</Text>
-            <Text style={styles.memSub}>Joined Jun 21 · committee</Text>
-          </View>
-          <View style={[styles.statusPill, styles.statusPillVoted]}>
-            <Text style={styles.statusPillTextVoted}>Committee</Text>
-          </View>
-        </View>
-
-        {/* Member Row 3 */}
-        <View style={styles.memRow}>
-          <View style={[styles.av, styles.avA]}>
-            <Text style={styles.avTextA}>NR</Text>
-          </View>
-          <View style={styles.memInfo}>
-            <Text style={styles.memName}>Nisha Rao</Text>
-            <Text style={styles.memSub}>Joined Jun 22 · member</Text>
-          </View>
-          <View style={[styles.statusPill, styles.statusPillApproved]}>
-            <Text style={styles.statusPillTextApproved}>Active</Text>
-          </View>
-        </View>
+        ))}
       </View>
     </ScrollView>
   );
@@ -362,29 +454,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  avG: {
-    backgroundColor: '#0d2019',
-  },
-  avP: {
-    backgroundColor: '#1e1428',
-  },
-  avA: {
-    backgroundColor: '#1e1200',
-  },
-  avTextG: {
+  avText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#5DCAA5',
-  },
-  avTextP: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#AFA9EC',
-  },
-  avTextA: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#EF9F27',
   },
   memInfo: {
     flex: 1,
